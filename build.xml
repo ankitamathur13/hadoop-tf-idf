@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TFIDF" default="main" basedir=".">
+	<property name="src.dir" location="src"/>
+	<property name="build.dir" location="bin"/>
+	<property name="dist.dir" location="dist"/>
+	<property name="lib.dir" location="lib"/>
+
+	<!-- classpath -->
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- delete the dirs first-->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+	</target>
+	<!-- createing the dirs again -->
+	<target name="makedir">
+		<mkdir dir="${build.dir}" />
+                <mkdir dir="${dist.dir}" />
+	</target>
+	<!-- complie the code -->
+	<target name="compile" depends="clean, makedir">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath">
+		</javac>
+	</target>
+	<!-- create the jar files -->
+	<target name="jar" depends="compile">
+		<jar destfile="${dist.dir}/job1.jar" basedir="${dist.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="index.TFDriver"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="main" depends="compile, jar">
+		<description> Main target</description>
+	</target>
+ </project>
+
