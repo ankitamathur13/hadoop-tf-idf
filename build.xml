@@ -29,7 +29,7 @@
 	</target>
 	<!-- create the jar files -->
 	<target name="jar" depends="compile">
-		<jar destfile="${dist.dir}/job1.jar" basedir="${dist.dir}">
+		<jar destfile="${dist.dir}/job1.jar" basedir="${build.dir}">
 			<manifest>
 				<attribute name="Main-Class" value="index.TFDriver"/>
 			</manifest>
