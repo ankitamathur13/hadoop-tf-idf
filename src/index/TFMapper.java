@@ -64,7 +64,7 @@ public class TFMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
         String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();
  
         // build the values and write <k,v> pairs through the context
-        StringBuilder valueBuilder = new StringBuilder();
+        StringBuilder valueBuilder = null;
         while (m.find()) {
             String matchedKey = m.group().toLowerCase();
             // remove names starting with non letters, digits, considered stopwords or containing other chars
@@ -72,6 +72,7 @@ public class TFMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
                     || googleStopwords.contains(matchedKey) || matchedKey.contains("_")) {
                 continue;
             }
+	    valueBuilder=new StringBuilder();
             valueBuilder.append(matchedKey);
             valueBuilder.append("@");
             valueBuilder.append(fileName);
